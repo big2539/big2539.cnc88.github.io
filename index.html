@@ -1,199 +1,157 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>แชร์รับฟรี 100THB</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>แชร์รับฟรี 100THB</title>
 
-  <!-- LIFF SDK -->
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(120deg, #000, #12001f, #000);
-      background-size: 400% 400%;
-      animation: bgMove 8s ease infinite;
-      font-family: 'Prompt', sans-serif;
-      color: #fff;
-    }
-
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .card {
-      width: 92%;
-      max-width: 420px;
-      background: #000;
-      border-radius: 22px;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      background: linear-gradient(90deg, #ff0066, #00ffff, #00ff99, #ff0066);
-      background-size: 300% 300%;
-      animation: borderRun 4s linear infinite;
-      z-index: -1;
-      border-radius: 24px;
-    }
-
-    @keyframes borderRun {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 300% 50%; }
-    }
-
-    @keyframes glow {
-      from { box-shadow: 0 0 15px rgba(255,0,120,.3); }
-      to { box-shadow: 0 0 35px rgba(0,255,255,.6); }
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 14px;
-      box-shadow: 0 0 20px rgba(0,255,255,.5);
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      margin: 10px 0 20px;
-      font-size: 28px;
-      background: linear-gradient(90deg, #00ffcc, #ff00ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 18px rgba(255,0,255,.6);
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 12px;
-      border: none;
-      border-radius: 50px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all .25s ease;
-    }
-
-    .share-btn {
-      background: linear-gradient(135deg, #00ff99, #00ffff);
-      color: #000;
-      box-shadow: 0 0 18px rgba(0,255,200,.8);
-    }
-
-    .share-btn:hover { transform: scale(1.05); }
-
-    .status {
-      margin-top: 12px;
-      font-size: 14px;
-      opacity: .85;
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(120deg,#000,#12001f,#000);
+  background-size:400% 400%;
+  animation:bgMove 8s ease infinite;
+  font-family:sans-serif;
+  color:#fff;
+}
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.card{
+  width:92%;
+  max-width:420px;
+  background:#000;
+  border-radius:22px;
+  padding:18px;
+  text-align:center;
+  box-shadow:0 0 25px rgba(0,255,255,.4);
+}
+.card img{
+  width:100%;
+  border-radius:16px;
+  box-shadow:0 0 20px #00ffff;
+}
+h2{
+  margin:14px 0;
+  background:linear-gradient(90deg,#00ffcc,#ff00ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:50px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  background:linear-gradient(135deg,#00ff99,#00ffff);
+  box-shadow:0 0 18px rgba(0,255,200,.8);
+}
+.status{
+  margin-top:10px;
+  font-size:14px;
+  opacity:.9;
+}
+</style>
 </head>
+
 <body>
+<div class="card">
+  <img src="https://img2.pic.in.th/pic/6bc9548c-e0c6-430d-b363-1350ab4a68fb.jpg">
+  <h2>รับฟรี 100THB</h2>
+  <button onclick="shareFlex()">📤 กดแชร์ไป LINE</button>
+  <div class="status" id="status">กำลังตรวจสอบ...</div>
+</div>
 
-  <div class="card">
-    <img src="https://img2.pic.in.th/pic/6bc9548c-e0c6-430d-b363-1350ab4a68fb.jpg" alt="โปรโมชั่น" />
-    <h1>รับฟรี 100THB</h1>
-    <button class="share-btn" onclick="shareFlex()">📤 กดแชร์ไป LINE</button>
-    <div class="status" id="status">เปิดผ่าน LINE เท่านั้น</div>
-  </div>
+<script>
+const liffId = "2008689015-HeE3q6Dd"; // ✅ LIFF ID ตามที่ให้มา
 
-  <script>
-  const liffId = "2008689015-HeE3q6Dd";
+async function initLiff(){
+  try{
+    await liff.init({ liffId });
 
-  async function initLiff() {
-    try {
-      await liff.init({ liffId });
-      if (!liff.isInClient()) {
-        document.getElementById('status').innerText = '❌ กรุณาเปิดผ่านแอป LINE';
-      }
-    } catch (e) {
-      document.getElementById('status').innerText = 'LIFF Error';
+    if(!liff.isInClient()){
+      document.getElementById("status").innerText =
+        "❌ กรุณาเปิดผ่านแอป LINE";
+      return;
     }
+
+    if(!liff.isLoggedIn()){
+      liff.login(); // ✅ จำเป็นมาก
+      return;
+    }
+
+    document.getElementById("status").innerText = "✅ พร้อมแชร์แล้ว";
+  }catch(e){
+    document.getElementById("status").innerText = "LIFF Error";
   }
+}
 
-  async function shareFlex() {
-    if (!liff.isInClient()) return;
-
-    try {
-      await liff.shareTargetPicker([
-        {
-          type: "flex",
-          altText: "รับฟรี 100THB",
-          contents: {
-            type: "bubble",
-            size: "giga",
-
-            hero: {
-              type: "image",
-              url: "https://img2.pic.in.th/pic/6bc9548c-e0c6-430d-b363-1350ab4a68fb.jpg",
-              size: "full",
-              aspectRatio: "1.91:1",
-              aspectMode: "cover"
+async function shareFlex(){
+  try{
+    await liff.shareTargetPicker([{
+      type:"flex",
+      altText:"รับฟรี 100THB",
+      contents:{
+        type:"bubble",
+        size:"giga",
+        hero:{
+          type:"image",
+          url:"https://img2.pic.in.th/pic/6bc9548c-e0c6-430d-b363-1350ab4a68fb.jpg",
+          size:"full",
+          aspectRatio:"4:5",
+          aspectMode:"cover"
+        },
+        body:{
+          type:"box",
+          layout:"vertical",
+          contents:[]
+        },
+        footer:{
+          type:"box",
+          layout:"vertical",
+          spacing:"sm",
+          contents:[
+            {
+              type:"button",
+              style:"primary",
+              action:{
+                type:"uri",
+                label:"🔥 รับฟรี 100THB",
+                uri:"https://lin.ee/dq5Ku9B"
+              }
             },
-
-            body: {
-              type: "box",
-              layout: "vertical",
-              paddingAll: "6px",
-              contents: []
-            },
-
-            footer: {
-              type: "box",
-              layout: "vertical",
-              spacing: "sm",
-              paddingAll: "14px",
-              backgroundColor: "#12001f",
-              contents: [
-                {
-                  type: "button",
-                  style: "primary",
-                  color: "#00ff99",
-                  height: "md",
-                  action: {
-                    type: "uri",
-                    label: "🔥 รับฟรี 100THB",
-                    uri: "https://lin.ee/dq5Ku9B"
-                  }
-                },
-                {
-                  type: "button",
-                  style: "secondary",
-                  height: "md",
-                  action: {
-                    type: "uri",
-                    label: "🌐 เข้าเว็บไซต์",
-                    uri: "https://porsches88.com"
-                  }
-                }
-              ]
+            {
+              type:"button",
+              style:"secondary",
+              action:{
+                type:"uri",
+                label:"🌐 เข้าเว็บไซต์",
+                uri:"https://porsches88.com"
+              }
             }
-          }
+          ]
         }
-      ]);
+      }
+    }]);
 
-      document.getElementById('status').innerText = '✅ แชร์สำเร็จ';
-    } catch (err) {
-      document.getElementById('status').innerText = '❌ ยกเลิกการแชร์';
-    }
+    document.getElementById("status").innerText = "✅ แชร์สำเร็จ";
+  }catch(e){
+    document.getElementById("status").innerText = "❌ ยกเลิกการแชร์";
   }
+}
 
-  initLiff();
+initLiff();
 </script>
+</body>
+</html>
