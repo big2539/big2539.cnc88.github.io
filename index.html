@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แชร์รับฟรี 100THB</title>
+
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+<style>
+/* ---------- พื้นหลังไฟวิ่ง ---------- */
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(120deg, #000, #1a1a1a, #000);
+    background-size: 300% 300%;
+    animation: bgMove 6s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Prompt', sans-serif;
+    color: #fff;
+    overflow: hidden;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        120deg,
+        transparent,
+        transparent 20px,
+        rgba(255,215,0,0.08) 40px
+    );
+    animation: lightFlow 3s linear infinite;
+}
+
+@keyframes lightFlow {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(50%); }
+}
+
+/* ---------- การ์ด ---------- */
+.card {
+    position: relative;
+    background: rgba(0,0,0,0.75);
+    border-radius: 22px;
+    padding: 28px;
+    width: 90%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow:
+        0 0 25px rgba(255,215,0,0.5),
+        0 0 60px rgba(255,215,0,0.3);
+    animation: neonPulse 2.5s infinite alternate;
+    z-index: 2;
+}
+
+@keyframes neonPulse {
+    from { box-shadow: 0 0 20px rgba(255,215,0,0.4); }
+    to   { box-shadow: 0 0 45px rgba(255,215,0,0.9); }
+}
+
+.card img {
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 18px;
+    box-shadow:
+        0 0 20px rgba(255,215,0,0.6),
+        0 0 40px rgba(255,215,0,0.4);
+}
+
+h1 {
+    font-size: 28px;
+    color: #ffd700;
+    text-shadow: 0 0 12px #ffd700, 0 0 25px #ffae00;
+}
+
+p {
+    margin: 10px 0 24px;
+    opacity: 0.85;
+}
+
+/* ---------- ปุ่ม ---------- */
+button {
+    width: 100%;
+    padding: 18px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #000;
+    background: linear-gradient(135deg, #ffd700, #ff9f00);
+    box-shadow:
+        0 0 25px rgba(255,215,0,0.8),
+        0 0 50px rgba(255,215,0,0.6);
+    animation: btnGlow 1.8s infinite alternate;
+}
+
+@keyframes btnGlow {
+    from { transform: scale(1); box-shadow: 0 0 25px rgba(255,215,0,0.6); }
+    to   { transform: scale(1.05); box-shadow: 0 0 45px rgba(255,215,0,1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <img src="https://img2.pic.in.th/pic/6bc9548c-e0c6-430d-b363-1350ab4a68fb.jpg">
+    <h1>รับฟรี 100THB</h1>
+    <p>แชร์ให้เพื่อนหรือกลุ่ม รับสิทธิ์ทันที</p>
+    <button onclick="shareFlex()">🔥 กดแชร์รับ 100THB</button>
+</div>
+
+<script>
+async function shareFlex() {
+    await liff.init({ liffId: "2008689015-HeE3q6Dd" });
+
+    if (!liff.isInClient()) {
+        alert("กรุณาเปิดผ่านแอป LINE");
+        return;
+    }
+
+    liff.shareTargetPicker([{
+        type: "flex",
+        altText: "รับฟรี 100THB",
+        contents: {
+            type: "bubble",
+            hero: {
+                type: "image",
+                url: "https://img2.pic.in.th/pic/6bc9548c-e0c6-430d-b363-1350ab4a68fb.jpg",
+                size: "full",
+                aspectRatio: "1.91:1",
+                aspectMode: "cover"
+            },
+            body: {
+                type: "box",
+                layout: "vertical",
+                contents: [
+                    {
+                        type: "text",
+                        text: "รับฟรี 100THB",
+                        weight: "bold",
+                        size: "xl",
+                        align: "center"
+                    },
+                    {
+                        type: "text",
+                        text: "เลือกสิทธิ์ด้านล่าง",
+                        size: "sm",
+                        color: "#888888",
+                        align: "center",
+                        margin: "md"
+                    }
+                ]
+            },
+            footer: {
+                type: "box",
+                layout: "vertical",
+                spacing: "sm",
+                contents: [
+                    {
+                        type: "button",
+                        style: "primary",
+                        action: {
+                            type: "uri",
+                            label: "รับฟรี 100THB",
+                            uri: "https://lin.ee/dq5Ku9B"
+                        }
+                    },
+                    {
+                        type: "button",
+                        style: "secondary",
+                        action: {
+                            type: "uri",
+                            label: "เข้าเว็บไซต์",
+                            uri: "https://porsches88.com"
+                        }
+                    }
+                ]
+            }
+        }
+    }]);
+}
+</script>
+
+</body>
+</html>
